@@ -1,4 +1,16 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="32" height="32" fill="#0A0B0D"/>
-<path d="M26.6677 23.7149H8.38057V20.6496H5.33301V8.38159H26.6677V23.7149ZM8.38057 20.6496H23.6201V11.4482H8.38057V20.6496ZM16.0011 16.0021L13.8461 18.1705L11.6913 16.0021L13.8461 13.8337L16.0011 16.0021ZM22.0963 16.0008L19.9414 18.1691L17.7865 16.0008L19.9414 13.8324L22.0963 16.0008Z" fill="#32F08C"/>
+  <defs>
+    <linearGradient id="ring" x1="4" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="0.55" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#FB7185"/>
+    </linearGradient>
+    <filter id="s" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="1.25" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect x="1.5" y="1.5" width="29" height="29" rx="7.5" fill="#0A0B0D" filter="url(#s)"/>
+  <rect x="2.5" y="2.5" width="27" height="27" rx="6.5" stroke="url(#ring)" stroke-width="1" opacity="0.85"/>
+  <path fill="#FFFFFF" d="M8.6 9.4c0-.44.36-.8.8-.8h1.2c.44 0 .8.36.8.8v5.2h4.0V9.4c0-.44.36-.8.8-.8h1.2c.44 0 .8.36.8.8v13.2c0 .44-.36.8-.8.8h-1.2c-.44 0-.8-.36-.8-.8v-5.4h-4.0v5.4c0 .44-.36.8-.8.8H9.4c-.44 0-.8-.36-.8-.8V9.4Z"/>
+  <path fill="#FFFFFF" d="M19.95 9.55c.3-.35.85-.39 1.2-.09l.78.67c.35.3.39.85.09 1.2l-3.05 3.55v7.72c0 .44-.36.8-.8.8h-1.15c-.44 0-.8-.36-.8-.8v-7.72l-3.05-3.55c-.3-.35-.26-.9.09-1.2l.78-.67c.35-.3.9-.26 1.2.09l2.57 2.99 2.57-2.99Z"/>
 </svg>
