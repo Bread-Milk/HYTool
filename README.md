@@ -1,57 +1,49 @@
-# React + TypeScript + Vite
+# HYTool - 个人工具箱（本地工具站）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HYTool 是一个聚合常用效率工具的个人网站，主打：纯前端、本地处理、即开即用。
 
-Currently, two official plugins are available:
+## 功能概览
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 图片工具
+- 图片格式转换（PNG / JPG / WEBP）
+- 二维码生成（可自定义颜色、容错率）
 
-## Expanding the ESLint configuration
+### 文档与数据
+- JSON 格式化 / 压缩 / 校验
+- JSON 转 Excel（.xlsx）
+- Excel / CSV 转 JSON
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 开发者工具
+- Base64 编解码
+- Hash 生成器（SHA-1 / SHA-256 / SHA-384 / SHA-512）
+- 单位换算（长度 / 重量 / 温度）
+- 时间戳转换（Unix 时间戳 ↔ 自然时间）
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### AI 工具
+- Claude 终端命令速查（CLI 命令、启动参数、REPL 斜杠命令）
+
+## 技术栈
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Zustand（主题、近期使用等本地状态）
+
+## 本地运行
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+打开终端输出的地址（通常为 http://localhost:5173/）。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 构建
 
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm run build
+npm run preview
 ```
+
+## 隐私说明
+- 本项目大多数工具均为浏览器本地处理，不会上传文件到服务器。
+- “本地处理”能力取决于浏览器限制与所用工具实现（例如文档转换类功能可能需要额外引擎支持）。
