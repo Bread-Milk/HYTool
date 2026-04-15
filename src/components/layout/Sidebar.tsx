@@ -20,7 +20,7 @@ export default function Sidebar() {
           <div className="w-8 h-8 rounded-lg bg-black dark:bg-white flex items-center justify-center">
             <Zap className="w-4 h-4 text-white dark:text-black" />
           </div>
-          <span className="font-bold text-lg text-zinc-900 dark:text-white tracking-tight">Toolbox</span>
+          <span className="font-bold text-lg text-zinc-900 dark:text-white tracking-tight">HYToolBox</span>
         </Link>
       </div>
 
