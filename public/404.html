@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting…</title>
+    <script>
+      (function () {
+        const repoBase = '/HYTool';
+        const l = window.location;
+        const path = l.pathname.startsWith(repoBase) ? l.pathname.slice(repoBase.length) : l.pathname;
+        const search = l.search.startsWith('?') ? l.search.slice(1) : l.search;
+        const target =
+          l.protocol +
+          '//' +
+          l.host +
+          repoBase +
+          '/?p=' +
+          encodeURIComponent(path) +
+          (search ? '&q=' + encodeURIComponent(search) : '') +
+          l.hash;
+        l.replace(target);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
