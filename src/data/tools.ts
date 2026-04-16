@@ -8,7 +8,8 @@ import {
   Calculator,
   QrCode,
   Bot,
-  Clock
+  Clock,
+  DollarSign
 } from 'lucide-react';
 
 export interface ToolInfo {
@@ -71,6 +72,15 @@ export const tools: ToolInfo[] = [
     category: 'developer',
     icon: Clock,
     path: '/tools/timestamp-converter',
+  },
+  {
+    id: 'salary-tracker',
+    name: '工资显示器',
+    description: '实时显示今天已赚工资，支持月薪、工作天数与税后自动换算。',
+    category: 'developer',
+    icon: DollarSign,
+    path: '/tools/salary-tracker',
+    isPopular: true,
   },
   {
     id: 'base64-codec',
