@@ -19,8 +19,26 @@ export default function TimestampConverter() {
   const [inputTimestamp, setInputTimestamp] = useState<string>('');
   const [outputDate, setOutputDate] = useState<string>('');
   const [unit, setUnit] = useState<'s' | 'ms'>('s');
+  const [customDuration, setCustomDuration] = useState({
+    days: '',
+    hours: '',
+    minutes: '',
+  });
 
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
+
+  const hasCustomDurationInput = Object.values(customDuration).some((value) => value !== '');
+  const customDurationSeconds = (() => {
+    const days = Number(customDuration.days || 0);
+    const hours = Number(customDuration.hours || 0);
+    const minutes = Number(customDuration.minutes || 0);
+
+    if ([days, hours, minutes].some((value) => !Number.isFinite(value) || value < 0)) {
+      return null;
+    }
+
+    return (Math.floor(days) * 24 * 60 * 60) + (Math.floor(hours) * 60 * 60) + (Math.floor(minutes) * 60);
+  })();
 
   // Clock effect
   useEffect(() => {
@@ -98,8 +116,12 @@ export default function TimestampConverter() {
     setUnit('s');
   };
 
+  const handleCustomDurationChange = (field: 'days' | 'hours' | 'minutes', value: string) => {
+    setCustomDuration((prev) => ({ ...prev, [field]: value }));
+  };
+
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto h-[calc(100vh-120px)] flex flex-col">
+    <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto h-[calc(100vh-120px)] flex flex-col overflow-y-auto pr-1">
       <div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
           <Clock className="w-8 h-8 text-orange-500" />
@@ -241,6 +263,79 @@ export default function TimestampConverter() {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800/50 pb-4">
+          <div>
+            <h2 className="text-lg font-bold text-zinc-900 dark:text-white">自定义时长 转换为 秒数</h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">支持天、小时、分钟组合换算，例如 3 小时 3 分钟。</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-zinc-600 dark:text-zinc-400">天数</label>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
+              value={customDuration.days}
+              onChange={(e) => handleCustomDurationChange('days', e.target.value)}
+              placeholder="例如：1"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-lg font-mono focus:ring-2 focus:ring-orange-500 outline-none text-zinc-900 dark:text-zinc-100"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-zinc-600 dark:text-zinc-400">小时</label>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
+              value={customDuration.hours}
+              onChange={(e) => handleCustomDurationChange('hours', e.target.value)}
+              placeholder="例如：3"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-lg font-mono focus:ring-2 focus:ring-orange-500 outline-none text-zinc-900 dark:text-zinc-100"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-zinc-600 dark:text-zinc-400">分钟</label>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
+              value={customDuration.minutes}
+              onChange={(e) => handleCustomDurationChange('minutes', e.target.value)}
+              placeholder="例如：3"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-lg font-mono focus:ring-2 focus:ring-orange-500 outline-none text-zinc-900 dark:text-zinc-100"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-zinc-600 dark:text-zinc-400">转换结果 (秒)</label>
+          <div className="relative">
+            <input
+              type="text"
+              readOnly
+              value={hasCustomDurationInput && customDurationSeconds !== null ? customDurationSeconds : ''}
+              placeholder="等待输入..."
+              className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-4 pr-24 py-3 text-lg font-mono focus:outline-none text-orange-600 dark:text-orange-500"
+            />
+            <button
+              onClick={() => customDurationSeconds !== null && handleCopy('custom-seconds', customDurationSeconds.toString())}
+              disabled={!hasCustomDurationInput || customDurationSeconds === null}
+              className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-lg text-xs font-medium hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors disabled:opacity-50"
+            >
+              {copiedStates['custom-seconds'] ? '已复制' : '复制'}
+            </button>
           </div>
         </div>
       </div>
