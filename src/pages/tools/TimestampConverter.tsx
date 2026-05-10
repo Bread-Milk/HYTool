@@ -121,7 +121,7 @@ export default function TimestampConverter() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto h-[calc(100vh-120px)] flex flex-col overflow-y-auto pr-1">
+    <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto h-[calc(100vh-120px)] flex flex-col">
       <div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
           <Clock className="w-8 h-8 text-orange-500" />
@@ -131,18 +131,18 @@ export default function TimestampConverter() {
       </div>
 
       {/* Current Time Banner */}
-      <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-3xl p-6 md:p-8 text-white shadow-lg shadow-orange-500/20 relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-white/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <div className="text-orange-100 font-medium mb-1 text-sm uppercase tracking-widest">
-              当前 Unix 时间戳 (秒)
-            </div>
-            <div className="text-4xl md:text-5xl font-black font-mono tracking-tight">
+      <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-3xl p-6 md:p-8 text-white shadow-lg shadow-orange-500/20 relative isolate">
+        <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+          <div className="absolute right-0 top-0 w-64 h-64 bg-white/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/3" />
+        </div>
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="min-w-0 flex-1">
+            <div className="text-orange-100 font-medium mb-1 text-sm uppercase tracking-widest">当前 UNIX 时间戳 (秒)</div>
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-black font-mono tracking-tight leading-tight break-all pb-1">
               {currentUnix}
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 lg:justify-end lg:flex-nowrap shrink-0">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
               className="p-3 bg-white/20 hover:bg-white/30 rounded-xl backdrop-blur-sm transition-colors"
