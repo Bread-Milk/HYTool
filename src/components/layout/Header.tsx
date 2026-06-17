@@ -1,67 +1,95 @@
-import { Search, Menu, Moon, Sun, Monitor, DollarSign } from 'lucide-react';
+import { Search, Menu, Moon, Sun, Monitor, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '@/hooks/useTheme';
-import { Link } from 'react-router-dom';
-import { useSalaryEarned } from '@/hooks/useSalaryEarned';
-import { formatMoney } from '@/lib/salary';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const [searchFocused, setSearchFocused] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const salary = useSalaryEarned();
-  const earnedText = formatMoney(salary.earned);
+  const location = useLocation();
+
+  const navItems = [
+    { label: '全部工具', path: '/' },
+    { label: '近期使用', path: '/recent' },
+    { label: '推荐工具', path: '/popular' },
+    { label: '图片处理', path: '/cat/image' },
+    { label: '文本工具', path: '/cat/text' },
+    { label: '开发者工具', path: '/cat/developer' },
+  ];
 
   return (
-    <header className="h-16 flex-shrink-0 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-40 px-6 flex items-center justify-between">
-      <div className="flex items-center gap-4 flex-1">
-        <button className="md:hidden p-2 -ml-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-          <Menu className="w-5 h-5" />
-        </button>
-
-        <div className={`relative max-w-md w-full transition-all duration-300 ${searchFocused ? 'ring-2 ring-blue-500/20 rounded-xl' : ''}`}>
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
-          <input
-            type="text"
-            placeholder="搜索工具 (Cmd+K)"
-            onFocus={() => setSearchFocused(true)}
-            onBlur={() => setSearchFocused(false)}
-            className="w-full h-10 pl-10 pr-4 bg-zinc-100 dark:bg-zinc-900 border-none rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-400 placeholder:text-zinc-500 text-zinc-900 dark:text-zinc-100 transition-all"
-          />
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 hidden sm:flex">
-            <kbd className="font-sans px-1.5 py-0.5 text-[10px] rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-500 shadow-sm">⌘</kbd>
-            <kbd className="font-sans px-1.5 py-0.5 text-[10px] rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-500 shadow-sm">K</kbd>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-4">
-        {/* Mobile Theme Toggle */}
-        <button 
-          onClick={toggleTheme}
-          className="md:hidden p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800"
-        >
-          {theme === 'light' ? <Sun className="w-5 h-5" /> : theme === 'dark' ? <Moon className="w-5 h-5" /> : <Monitor className="w-5 h-5" />}
-        </button>
-
-        <Link
-          to="/tools/salary-tracker"
-          className={`hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold font-mono transition-colors ${
-            salary.isWorkday
-              ? 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/15'
-              : 'bg-zinc-100 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800/60'
-          }`}
-          title="查看工资显示器"
-        >
-          <DollarSign className="w-4 h-4" />
-          {earnedText}
+    <header className="h-12 flex-shrink-0 bg-white/70 dark:bg-[#000000]/70 backdrop-blur-md sticky top-0 z-50 px-4 flex items-center justify-between transition-colors border-b border-zinc-200 dark:border-zinc-800/50">
+      <div className="max-w-5xl mx-auto w-full flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-1.5 text-zinc-900 dark:text-zinc-100 hover:opacity-70 transition-opacity">
+          <Zap className="w-4 h-4" />
         </Link>
 
-        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 p-[2px]">
-          <div className="w-full h-full rounded-full bg-white dark:bg-zinc-950 flex items-center justify-center overflow-hidden">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Avatar" className="w-full h-full object-cover" />
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-10 px-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              to={item.path}
+              className={`text-[12px] font-medium tracking-wide transition-colors ${
+                location.pathname === item.path
+                  ? 'text-zinc-900 dark:text-white'
+                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Right Actions */}
+        <div className="flex items-center gap-4">
+          <div className={`relative transition-all duration-300 ${searchFocused ? 'w-48' : 'w-8'} overflow-hidden flex items-center justify-end`}>
+            <Search className={`absolute left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-500 cursor-pointer ${searchFocused ? 'hidden' : 'block'}`} onClick={() => setSearchFocused(true)} />
+            <Search className={`absolute left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400 ${searchFocused ? 'block' : 'hidden'}`} />
+            <input
+              type="text"
+              placeholder="Search..."
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setSearchFocused(false)}
+              className={`h-7 pl-8 pr-3 bg-zinc-100 dark:bg-zinc-800 border-none rounded-full text-xs focus:outline-none text-zinc-900 dark:text-zinc-100 transition-all ${
+                searchFocused ? 'w-full opacity-100' : 'w-0 opacity-0'
+              }`}
+            />
           </div>
+
+          <button 
+            onClick={toggleTheme}
+            className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors"
+          >
+            {theme === 'light' ? <Sun className="w-4 h-4" /> : theme === 'dark' ? <Moon className="w-4 h-4" /> : <Monitor className="w-4 h-4" />}
+          </button>
+
+          <button 
+            className="md:hidden text-zinc-500 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Menu className="w-4 h-4" />
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="absolute top-12 left-0 right-0 bg-white dark:bg-[#000000] border-b border-zinc-200 dark:border-zinc-800 p-4 flex flex-col gap-4 md:hidden">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              to={item.path}
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </header>
   );
 }
