@@ -10,7 +10,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-[#f5f5f7] py-8 border-t border-zinc-300 dark:border-zinc-800 w-full mt-20">
+    <footer className="bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-[#f5f5f7] py-8 border-t border-zinc-300 dark:border-zinc-800 w-full mt-auto">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-zinc-300 dark:border-zinc-700 pb-6 mb-6">
           <div className="flex items-center gap-2">

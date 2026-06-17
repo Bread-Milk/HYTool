@@ -59,7 +59,7 @@ export default function Home() {
   }, [isRecentPage, isPopularPage, urlCategory, pageTitle]);
 
   return (
-    <div className="w-full flex flex-col items-center animate-in fade-in duration-700 pb-20">
+    <div className="w-full flex flex-col items-center animate-in fade-in duration-700 flex-1 h-full">
       {/* Hero Section */}
       <section className="w-full pt-24 pb-16 px-6 text-center max-w-4xl mx-auto">
         <motion.h1 
@@ -105,7 +105,7 @@ export default function Home() {
       )}
 
       {/* Grid */}
-      <div className="w-full max-w-[1200px] px-6">
+      <div className="w-full max-w-[1200px] px-6 pb-20">
         <motion.div 
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

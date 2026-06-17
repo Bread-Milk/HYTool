@@ -48,18 +48,18 @@ export default function WordCounter() {
   }, [text]);
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-6xl mx-auto h-[calc(100vh-120px)] flex flex-col">
+    <div className="space-y-8 animate-in fade-in duration-500 w-full flex-1 flex flex-col min-h-0 pb-10">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
-            <Type className="w-8 h-8 text-sky-500" />
+          <h1 className="text-3xl font-semibold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center gap-3">
+            <Type className="w-8 h-8 text-[#0066cc] dark:text-[#2997ff]" />
             字数统计
           </h1>
-          <p className="text-zinc-500 mt-2">实时统计输入文本的字符数、单词数、行数及预估阅读时间。</p>
+          <p className="text-[#86868b] mt-2 text-sm">实时统计输入文本的字符数、单词数、行数及预估阅读时间。</p>
         </div>
         <button
           onClick={() => setText('')}
-          className="flex items-center gap-2 px-4 py-2 text-zinc-500 hover:text-sky-500 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm font-medium transition-colors shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] bg-white dark:bg-[#1d1d1f] border border-zinc-200 dark:border-zinc-800 rounded-full text-sm font-medium transition-colors shadow-sm"
         >
           <RefreshCcw className="w-4 h-4" />
           清空内容
@@ -68,7 +68,7 @@ export default function WordCounter() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
         {[
-          { label: '总字数', value: stats.words, color: 'text-sky-500' },
+          { label: '总字数', value: stats.words, color: 'text-[#0066cc] dark:text-[#2997ff]' },
           { label: '字符(含空格)', value: stats.charsWithSpaces },
           { label: '字符(不含空格)', value: stats.charsNoSpaces },
           { label: '中文字符', value: stats.chineseChars },
@@ -76,21 +76,21 @@ export default function WordCounter() {
           { label: '段落行数', value: stats.lines },
           { label: '阅读时间(分)', value: stats.readingTime },
         ].map((stat, idx) => (
-          <div key={idx} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
-            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-2">{stat.label}</span>
-            <span className={`text-2xl font-black font-mono ${stat.color || 'text-zinc-900 dark:text-white'}`}>
+          <div key={idx} className="bg-white dark:bg-[#1d1d1f] border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
+            <span className="text-xs font-medium text-[#86868b] mb-2">{stat.label}</span>
+            <span className={`text-2xl font-semibold font-mono ${stat.color || 'text-[#1d1d1f] dark:text-[#f5f5f7]'}`}>
               {stat.value.toLocaleString()}
             </span>
           </div>
         ))}
       </div>
 
-      <div className="flex-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+      <div className="flex-1 min-h-[400px] bg-white dark:bg-[#1d1d1f] border border-zinc-200 dark:border-zinc-800 rounded-[24px] overflow-hidden shadow-sm flex flex-col focus-within:ring-2 focus-within:ring-[#0066cc]/20 transition-shadow">
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="在此输入或粘贴需要统计的文本..."
-          className="flex-1 w-full p-6 bg-transparent border-none resize-none focus:ring-0 text-base leading-relaxed text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 outline-none"
+          className="flex-1 w-full p-8 bg-transparent border-none resize-none focus:ring-0 text-base leading-relaxed text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] outline-none"
           spellCheck="false"
         />
       </div>
