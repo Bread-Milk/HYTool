@@ -48,7 +48,7 @@ export default function WordCounter() {
   }, [text]);
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 w-full flex-1 flex flex-col min-h-0 pb-10">
+    <div className="space-y-8 animate-in fade-in duration-500 w-full flex-1 flex flex-col pb-10">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center gap-3">
@@ -85,12 +85,12 @@ export default function WordCounter() {
         ))}
       </div>
 
-      <div className="flex-1 min-h-[400px] bg-white dark:bg-[#1d1d1f] border border-zinc-200 dark:border-zinc-800 rounded-[24px] overflow-hidden shadow-sm flex flex-col focus-within:ring-2 focus-within:ring-[#0066cc]/20 transition-shadow">
+      <div className="flex-1 min-h-[500px] bg-white dark:bg-[#1d1d1f] border border-zinc-200 dark:border-zinc-800 rounded-[24px] overflow-hidden shadow-sm flex flex-col focus-within:ring-2 focus-within:ring-[#0066cc]/20 transition-shadow">
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="在此输入或粘贴需要统计的文本..."
-          className="flex-1 w-full p-8 bg-transparent border-none resize-none focus:ring-0 text-base leading-relaxed text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] outline-none"
+          className="flex-1 w-full h-full p-8 bg-transparent border-none resize-none focus:ring-0 text-base leading-relaxed text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] outline-none"
           spellCheck="false"
         />
       </div>
