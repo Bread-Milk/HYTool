@@ -617,7 +617,7 @@ export default function ClaudeCommands() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-5xl mx-auto h-[calc(100vh-120px)] flex flex-col">
+    <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto flex flex-col pb-10">
       <div className="shrink-0">
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
           <Terminal className="w-8 h-8 text-indigo-500" />

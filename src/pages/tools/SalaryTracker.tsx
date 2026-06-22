@@ -28,7 +28,7 @@ export default function SalaryTracker() {
   const nowText = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-5xl mx-auto h-[calc(100vh-120px)] flex flex-col">
+    <div className="space-y-8 animate-in fade-in duration-500 max-w-5xl mx-auto flex flex-col pb-10">
       <div className="flex items-start justify-between gap-6">
         <div>
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
