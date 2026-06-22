@@ -59,7 +59,7 @@ export default function Home() {
   }, [isRecentPage, isPopularPage, urlCategory, pageTitle]);
 
   return (
-    <div className="w-full flex flex-col items-center animate-in fade-in duration-700 flex-1 h-full">
+    <div className="w-full flex flex-col items-center animate-in fade-in duration-700 flex-1">
       {/* Hero Section */}
       <section className="w-full pt-24 pb-16 px-6 text-center max-w-4xl mx-auto">
         <motion.h1 
