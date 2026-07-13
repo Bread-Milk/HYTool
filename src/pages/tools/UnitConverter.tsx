@@ -86,7 +86,7 @@ export default function UnitConverter() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto h-full">
+    <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto h-full flex flex-col pb-8">
       <div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
           <Calculator className="w-8 h-8 text-amber-500" />

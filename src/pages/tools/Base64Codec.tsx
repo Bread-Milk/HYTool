@@ -40,7 +40,7 @@ export default function Base64Codec() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto h-full flex flex-col">
+    <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto h-full flex flex-col pb-8">
       <div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-white flex items-center gap-3">
           <Code className="w-8 h-8 text-violet-500" />
